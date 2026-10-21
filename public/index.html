@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Simulador web de envios ARINC 429">
+    <title>Simulador ARINC 429</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <main class="container">
+      <header class="page-header">
+        <div>
+          <p class="eyebrow">ENTORNO DE SIMULACION</p>
+          <h1>Control de envios ARINC 429</h1>
+          <p class="subtitle">Genere tramas de prueba y consulte los registros guardados.</p>
+        </div>
+        <span class="status"><span class="status-dot"></span> Simulador activo</span>
+      </header>
+
+      <section class="panel" aria-labelledby="form-title">
+        <h2 id="form-title">Nuevo envio</h2>
+        <form id="envio-form">
+          <label>
+            Instrumento
+            <select name="instrumento" required>
+              <option value="altitud">Altitud</option>
+              <option value="velocidad">Velocidad</option>
+              <option value="temperatura">Temperatura</option>
+              <option value="presion">Presion</option>
+            </select>
+          </label>
+          <label>
+            Valor
+            <input name="valor" type="number" step="any" required placeholder="Ej. 123.45">
+          </label>
+          <button type="submit">Generar y guardar</button>
+        </form>
+        <p id="message" class="message" role="status" aria-live="polite"></p>
+        <p class="hint">La trama y la tension son valores de simulacion; no se transmite por hardware.</p>
+      </section>
+
+      <section class="panel" aria-labelledby="records-title">
+        <div class="section-heading">
+          <div>
+            <h2 id="records-title">Envios registrados</h2>
+            <p>Actualizacion automatica cada 3 segundos.</p>
+          </div>
+          <button id="refresh-button" class="secondary" type="button">Actualizar</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Instrumento</th>
+                <th>Valor</th>
+                <th>Trama ARINC 429</th>
+                <th>Tension (V)</th>
+                <th>Fecha</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="envios-body">
+              <tr><td colspan="7" class="empty">Cargando registros...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <footer>Simulacion educativa: valide etiquetas, escalas y cableado antes de cualquier integracion real.</footer>
+    </main>
+  </body>
+</html>
